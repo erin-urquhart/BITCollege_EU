@@ -115,11 +115,39 @@ namespace BITCollege_EU.Models
             } while (gradePointState != newGradePointState);                                          
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SetNextStudentNumber()
+        {
+
+        }
+
         //defining navigational properties for Student
         public virtual ICollection<Registration> Registration { get; set; }
+        public virtual ICollection<StudentCard> StudentCard { get; set; }
         public virtual GradePointState GradePointState { get; set; }
         public virtual AcademicProgram AcademicProgram { get; set; }
 
+    }
+
+    /// <summary>
+    /// StudentCard Model -
+    /// </summary>
+    public class StudentCard
+    {
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int StudentCardId { get; set; }
+
+        [Required]
+        [ForeignKey("Student")]
+        public int StudentId { get; set; }
+
+        [Required]
+        public long CardNumber { get; set; }
+
+        //defining navigational properties for StudentCard
+        public virtual Student Student { get; set; }
     }
 
     /// <summary>
@@ -598,6 +626,14 @@ namespace BITCollege_EU.Models
 
         public String Notes { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public virtual void SetNextCourseNumber()
+        {
+
+        }
+
         //defining navigational properties for Course
         public virtual ICollection<Registration> Registration { get; set; }
         public virtual AcademicProgram AcademicProgram { get; set; }
@@ -622,6 +658,14 @@ namespace BITCollege_EU.Models
         [Display(Name = "Final\nWeight")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{0:p}")]
         public double FinalWeight { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void SetNextCourseNumber()
+        {
+
+        }
     }
 
     /// <summary>
@@ -632,6 +676,14 @@ namespace BITCollege_EU.Models
         [Required]
         [Display(Name = "Maximum\nAttempts")]
         public int MaximumAttempts { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void SetNextCourseNumber()
+        {
+            
+        }
     }
 
     /// <summary>
@@ -639,7 +691,13 @@ namespace BITCollege_EU.Models
     /// </summary>
     public class AuditCourse : Course
     {
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void SetNextCourseNumber()
+        {
+           
+        }
     }
 
     /// <summary>
@@ -674,8 +732,174 @@ namespace BITCollege_EU.Models
 
         public String Notes { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public void SetNextRegistrationNumber()
+        {
+
+        }
+
         //defining navigational properties for Registration
         public virtual Course Course { get; set; }
         public virtual Student  Student { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public abstract class NextUniqueNumber
+    {
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int NextUniqueNumberId { get; set; }
+        public long NextAvailableNumber { get; set; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class NextGradedCourse : NextUniqueNumber
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private static NextGradedCourse nextGradedCourse = null;
+
+        private NextGradedCourse()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public NextGradedCourse GetInstance()
+        {
+            return nextGradedCourse;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class NextAuditCourse : NextUniqueNumber
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private static NextAuditCourse nextAuditCourse = null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private NextAuditCourse()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public NextAuditCourse GetInstance()
+        {
+            return nextAuditCourse;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class NextMasteryCourse : NextUniqueNumber
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private NextMasteryCourse nextMasteryCourse = null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private NextMasteryCourse()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public NextMasteryCourse GetInstance()
+        {
+            return nextMasteryCourse;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class NextStudent : NextUniqueNumber
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private NextStudent nextStudent = null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private NextStudent()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public NextStudent GetInstance()
+        {
+            return nextStudent;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class NextRegistration : NextUniqueNumber
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private NextRegistration nextRegistration = null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private NextRegistration()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public NextRegistration GetInstance()
+        {
+            return nextRegistration;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class StoredProcedure
+    {
+       public static long? NextNumber(String discriminator)
+        {
+            return 1;
+        }
     }
 }

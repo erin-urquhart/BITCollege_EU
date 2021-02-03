@@ -40,7 +40,7 @@ namespace BITCollege_EU.Controllers
         // GET: StudentCards/Create
         public ActionResult Create()
         {
-            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "FirstName");
+            ViewBag.StudentId = new SelectList(db.Students, "StudentId", "FullName");
             return View();
         }
 

@@ -137,15 +137,31 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HonoursStatesController.cs" />
     <Compile Include="Controllers\MasteryCoursesController.cs" />
+    <Compile Include="Controllers\NextAuditCoursesController.cs" />
+    <Compile Include="Controllers\NextGradedCoursesController.cs" />
+    <Compile Include="Controllers\NextMasteryCoursesController.cs" />
+    <Compile Include="Controllers\NextRegistrationsController.cs" />
+    <Compile Include="Controllers\NextStudentsController.cs" />
+    <Compile Include="Controllers\NextUniqueNumbersController.cs" />
     <Compile Include="Controllers\ProbationStatesController.cs" />
     <Compile Include="Controllers\RegistrationsController.cs" />
     <Compile Include="Controllers\RegularStatesController.cs" />
+    <Compile Include="Controllers\StudentCardsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\SuspendedStatesController.cs" />
     <Compile Include="Data\BITCollege_EUContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202101160600043_InitialCreate.cs" />
+    <Compile Include="Migrations\202101160600043_InitialCreate.Designer.cs">
+      <DependentUpon>202101160600043_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102030237117_addedStudentCardNextUniqueNumberStoredProcedure.cs" />
+    <Compile Include="Migrations\202102030237117_addedStudentCardNextUniqueNumberStoredProcedure.Designer.cs">
+      <DependentUpon>202102030237117_addedStudentCardNextUniqueNumberStoredProcedure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SchoolModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -231,11 +247,37 @@
     <Content Include="Views\ProbationStates\Index.cshtml" />
     <Content Include="Views\RegularStates\Index.cshtml" />
     <Content Include="Views\SuspendedStates\Index.cshtml" />
+    <Content Include="Views\StudentCards\Create.cshtml" />
+    <Content Include="Views\StudentCards\Delete.cshtml" />
+    <Content Include="Views\StudentCards\Details.cshtml" />
+    <Content Include="Views\StudentCards\Edit.cshtml" />
+    <Content Include="Views\StudentCards\Index.cshtml" />
+    <Content Include="Views\NextAuditCourses\Delete.cshtml" />
+    <Content Include="Views\NextAuditCourses\Index.cshtml" />
+    <Content Include="Views\NextAuditCourses\Edit.cshtml" />
+    <Content Include="Views\NextGradedCourses\Delete.cshtml" />
+    <Content Include="Views\NextGradedCourses\Details.cshtml" />
+    <Content Include="Views\NextGradedCourses\Edit.cshtml" />
+    <Content Include="Views\NextMasteryCourses\Delete.cshtml" />
+    <Content Include="Views\NextMasteryCourses\Details.cshtml" />
+    <Content Include="Views\NextMasteryCourses\Edit.cshtml" />
+    <Content Include="Views\NextRegistrations\Delete.cshtml" />
+    <Content Include="Views\NextRegistrations\Details.cshtml" />
+    <Content Include="Views\NextRegistrations\Edit.cshtml" />
+    <Content Include="Views\NextStudents\Delete.cshtml" />
+    <Content Include="Views\NextStudents\Details.cshtml" />
+    <Content Include="Views\NextStudents\Edit.cshtml" />
+    <Content Include="Views\NextAuditCourses\Details.cshtml" />
+    <Content Include="Views\NextGradedCourses\Index.cshtml" />
+    <Content Include="Views\NextMasteryCourses\Index.cshtml" />
+    <Content Include="Views\NextRegistrations\Index.cshtml" />
+    <Content Include="Views\NextStudents\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Courses\" />
     <Folder Include="Views\GradePointStates\" />
+    <Folder Include="Views\NextUniqueNumbers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -249,6 +291,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202101160600043_InitialCreate.resx">
+      <DependentUpon>202101160600043_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102030237117_addedStudentCardNextUniqueNumberStoredProcedure.resx">
+      <DependentUpon>202102030237117_addedStudentCardNextUniqueNumberStoredProcedure.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

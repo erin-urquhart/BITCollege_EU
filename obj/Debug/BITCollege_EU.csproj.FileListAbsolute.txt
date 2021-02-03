@@ -83,3 +83,6 @@ C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.csproj.CoreComp
 C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.csproj.CopyComplete
 C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.dll
 C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.pdb
+C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.Migrations.InitialCreate.resources
+C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.csproj.GenerateResource.cache
+C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.Migrations.addedStudentCardNextUniqueNumberStoredProcedure.resources

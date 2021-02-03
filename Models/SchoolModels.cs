@@ -751,8 +751,16 @@ namespace BITCollege_EU.Models
     public abstract class NextUniqueNumber
     {
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        [Key]
         public int NextUniqueNumberId { get; set; }
+
+        [Required]
         public long NextAvailableNumber { get; set; }
+
+        /// <summary>
+        /// Defining a protected static variable of the data context object.
+        /// </summary>
+        protected static BITCollege_EUContext db = new BITCollege_EUContext();
     }
 
     /// <summary>
@@ -767,15 +775,30 @@ namespace BITCollege_EU.Models
 
         private NextGradedCourse()
         {
-
+            NextAvailableNumber = 200000;
         }
 
         /// <summary>
-        /// 
+        /// Method that checks the GetInstance of NextGradedCourse and creates a new one if not found in the database
+        /// or returns the one found.
         /// </summary>
-        /// <returns></returns>
-        public NextGradedCourse GetInstance()
+        /// <returns>The NextGradedCourse instance</returns>
+        public static NextGradedCourse GetInstance()
         {
+            //if nextGradedCourse is null, uses SingleOrDefault() method
+            //to grab the only record of NextGradedCourse and store it in the variable.
+            //If nextGradedCourse still evaluates to null, there was never anything in the database
+            if (nextGradedCourse == null)
+            {
+                //sets a new NextGradedCourse to the variable and populates it before persisting it to the database.
+                nextGradedCourse = db.NextGradedCourses.SingleOrDefault();
+                if (nextGradedCourse == null)
+                {
+                    nextGradedCourse = new NextGradedCourse();
+                    db.NextGradedCourses.Add(nextGradedCourse);
+                    db.SaveChanges();
+                }
+            }
             return nextGradedCourse;
         }
     }
@@ -795,15 +818,30 @@ namespace BITCollege_EU.Models
         /// </summary>
         private NextAuditCourse()
         {
-
+            NextAvailableNumber = 2000;
         }
 
         /// <summary>
-        /// 
+        /// Method that checks the GetInstance of NextAuditCourse and creates a new one if not found in the database
+        /// or returns the one found.
         /// </summary>
-        /// <returns></returns>
-        public NextAuditCourse GetInstance()
+        /// <returns>The NextGradedCourse instance</returns>
+        public static NextAuditCourse GetInstance()
         {
+            //if nextAuditCourse is null, uses SingleOrDefault() method
+            //to grab the only record of NextAuditCourse and store it in the variable.
+            //If nextAuditCourse still evaluates to null, there was never anything in the database
+            if (nextAuditCourse == null)
+            {
+                //sets a new NextAuditCourse to the variable and populates it before persisting it to the database.
+                nextAuditCourse = db.NextAuditCourses.SingleOrDefault();
+                if (nextAuditCourse == null)
+                {
+                    nextAuditCourse = new NextAuditCourse();
+                    db.NextAuditCourses.Add(nextAuditCourse);
+                    db.SaveChanges();
+                }
+            }
             return nextAuditCourse;
         }
     }
@@ -816,22 +854,37 @@ namespace BITCollege_EU.Models
         /// <summary>
         /// 
         /// </summary>
-        private NextMasteryCourse nextMasteryCourse = null;
+        private static NextMasteryCourse nextMasteryCourse = null;
 
         /// <summary>
         /// 
         /// </summary>
         private NextMasteryCourse()
         {
-
+            NextAvailableNumber = 20000;
         }
 
         /// <summary>
-        /// 
+        /// Method that checks the GetInstance of NextMasteryCourse and creates a new one if not found in the database
+        /// or returns the one found.
         /// </summary>
-        /// <returns></returns>
-        public NextMasteryCourse GetInstance()
+        /// <returns>The NextMasteryCourse instance</returns>
+        public static NextMasteryCourse GetInstance()
         {
+            //if nextMasteryCourse is null, uses SingleOrDefault() method
+            //to grab the only record of NextGradedCourse and store it in the variable.
+            //If nextGradedCourse still evaluates to null, there was never anything in the database
+            if (nextMasteryCourse == null)
+            {
+                //sets a new NextMasteryCourse to the variable and populates it before persisting it to the database.
+                nextMasteryCourse = db.NextMasteryCourses.SingleOrDefault();
+                if (nextMasteryCourse == null)
+                {
+                    nextMasteryCourse = new NextMasteryCourse();
+                    db.NextMasteryCourses.Add(nextMasteryCourse);
+                    db.SaveChanges();
+                }
+            }
             return nextMasteryCourse;
         }
     }
@@ -844,22 +897,37 @@ namespace BITCollege_EU.Models
         /// <summary>
         /// 
         /// </summary>
-        private NextStudent nextStudent = null;
+        private static NextStudent nextStudent = null;
 
         /// <summary>
         /// 
         /// </summary>
         private NextStudent()
         {
-
+            NextAvailableNumber = 20000000;
         }
 
         /// <summary>
-        /// 
+        /// Method that checks the GetInstance of NextStudent and creates a new one if not found in the database
+        /// or returns the one found.
         /// </summary>
-        /// <returns></returns>
-        public NextStudent GetInstance()
+        /// <returns>The NextStudent instance</returns>
+        public static NextStudent GetInstance()
         {
+            //if nextStudent is null, uses SingleOrDefault() method
+            //to grab the only record of NextStudent and store it in the variable.
+            //If nextStudent still evaluates to null, there was never anything in the database
+            if (nextStudent == null)
+            {
+                //sets a new nextStudent to the variable and populates it before persisting it to the database.
+                nextStudent = db.NextStudents.SingleOrDefault();
+                if (nextStudent == null)
+                {
+                    nextStudent = new NextStudent();
+                    db.NextStudents.Add(nextStudent);
+                    db.SaveChanges();
+                }
+            }
             return nextStudent;
         }
     }
@@ -872,22 +940,37 @@ namespace BITCollege_EU.Models
         /// <summary>
         /// 
         /// </summary>
-        private NextRegistration nextRegistration = null;
+        private static NextRegistration nextRegistration = null;
 
         /// <summary>
         /// 
         /// </summary>
         private NextRegistration()
         {
-
+            NextAvailableNumber = 700;
         }
 
         /// <summary>
-        /// 
+        /// Method that checks the GetInstance of NextRegistration and creates a new one if not found in the database
+        /// or returns the one found.
         /// </summary>
-        /// <returns></returns>
-        public NextRegistration GetInstance()
+        /// <returns>The NextRegistration instance</returns>
+        public static NextRegistration GetInstance()
         {
+            //if nextGradedCourse is null, uses SingleOrDefault() method
+            //to grab the only record of NextRegistration and store it in the variable.
+            //If nextRegistration still evaluates to null, there was never anything in the database
+            if (nextRegistration == null)
+            {
+                //sets a new NextRegistration to the variable and populates it before persisting it to the database.
+                nextRegistration = db.NextRegistrations.SingleOrDefault();
+                if (nextRegistration == null)
+                {
+                    nextRegistration = new NextRegistration();
+                    db.NextRegistrations.Add(nextRegistration);
+                    db.SaveChanges();
+                }
+            }
             return nextRegistration;
         }
     }

@@ -18,7 +18,7 @@ namespace BITCollege_EU.Controllers
         // GET: NextStudents
         public ActionResult Index()
         {
-            return View(db.NextStudents.ToList());
+            return View(NextStudent.GetInstance());
         }
 
         // GET: NextStudents/Details/5

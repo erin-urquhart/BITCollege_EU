@@ -88,3 +88,4 @@ C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.csproj.Generate
 C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.Migrations.addedStudentCardNextUniqueNumberStoredProcedure.resources
 C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.Properties.Resources.resources
 C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.Migrations.StoredProcedures.resources
+C:\Users\Erin\source\repos\BITCollege_EU\obj\Debug\BITCollege_EU.Migrations.studentRegistrationCorseDataAnnotations.resources

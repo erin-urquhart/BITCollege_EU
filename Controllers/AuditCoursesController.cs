@@ -51,6 +51,8 @@ namespace BITCollege_EU.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CourseId,AcademicProgramId,CourseNumber,Title,CreditHours,TuitionAmount,Notes")] AuditCourse auditCourse)
         {
+            auditCourse.SetNextCourseNumber();
+
             if (ModelState.IsValid)
             {
                 db.Courses.Add(auditCourse);

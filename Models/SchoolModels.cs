@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 using BITCollege_EU.Data;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace BITCollege_EU.Models
 {
@@ -24,8 +26,6 @@ namespace BITCollege_EU.Models
         [ForeignKey("AcademicProgram")]
         public int? AcademicProgramId { get; set; }
 
-        [Required]
-        [Range(10000000, 99999999)]
         [Display(Name = "Student\nNumber")]
         public long StudentNumber { get; set; }
 
@@ -116,11 +116,19 @@ namespace BITCollege_EU.Models
         }
 
         /// <summary>
-        /// 
+        /// Sets next student number based on the value returned from NextNumber.
         /// </summary>
         public void SetNextStudentNumber()
         {
-
+            long? studentNumber = StoredProcedure.NextNumber("NextStudent");
+            if (studentNumber != null)
+            {
+                StudentNumber = (long)studentNumber;
+            }
+            else
+            {
+                StudentNumber = -1;
+            }
         }
 
         //defining navigational properties for Student
@@ -589,7 +597,6 @@ namespace BITCollege_EU.Models
         [ForeignKey("AcademicProgram")]
         public int? AcademicProgramId { get; set; }
 
-        [Required]
         [Display(Name = "Course\nNumber")]
         public String CourseNumber { get; set; }
 
@@ -627,7 +634,7 @@ namespace BITCollege_EU.Models
         public String Notes { get; set; }
 
         /// <summary>
-        /// 
+        /// Method to be overriden in the Course subclasses
         /// </summary>
         public virtual void SetNextCourseNumber()
         {
@@ -660,11 +667,19 @@ namespace BITCollege_EU.Models
         public double FinalWeight { get; set; }
 
         /// <summary>
-        /// 
+        /// Override method that sets appropriate letter followed by the value returned from NextNumber.
         /// </summary>
         public override void SetNextCourseNumber()
         {
-
+            long? courseNumber = StoredProcedure.NextNumber("NextGradedCourse");
+            if (courseNumber != null)
+            {
+                CourseNumber = "G-" + courseNumber.ToString();
+            }
+            else
+            {
+                CourseNumber = "G-Error";
+            }
         }
     }
 
@@ -678,11 +693,19 @@ namespace BITCollege_EU.Models
         public int MaximumAttempts { get; set; }
 
         /// <summary>
-        /// 
+        /// Override method that sets appropriate letter followed by the value returned from NextNumber.
         /// </summary>
         public override void SetNextCourseNumber()
         {
-            
+            long? courseNumber = StoredProcedure.NextNumber("NextMasterCourse");
+            if (courseNumber != null)
+            {
+                CourseNumber = "M-" + courseNumber.ToString();
+            }
+            else
+            {
+                CourseNumber = "M-Error";
+            }
         }
     }
 
@@ -692,11 +715,19 @@ namespace BITCollege_EU.Models
     public class AuditCourse : Course
     {
         /// <summary>
-        /// 
+        /// Override method that sets appropriate letter followed by the value returned from NextNumber.
         /// </summary>
         public override void SetNextCourseNumber()
         {
-           
+            long? courseNumber = StoredProcedure.NextNumber("NextAuditCourse");
+            if (courseNumber != null)
+            {
+                CourseNumber = "A-" + courseNumber.ToString();
+            }
+            else
+            {
+                CourseNumber = "A-Error";
+            }
         }
     }
 
@@ -716,7 +747,6 @@ namespace BITCollege_EU.Models
         [ForeignKey("Course")]
         public int CourseId { get; set; }
 
-        [Required]
         [Display(Name = "Registration\nNumber")]
         public long RegistrationNumber { get; set; }
 
@@ -733,11 +763,19 @@ namespace BITCollege_EU.Models
         public String Notes { get; set; }
 
         /// <summary>
-        /// 
+        /// Method that sets appropriate letter followed by the value returned from NextNumber.
         /// </summary>
         public void SetNextRegistrationNumber()
         {
-
+            long? registrationNumber = StoredProcedure.NextNumber("NextRegistration");
+            if (registrationNumber != null)
+            {
+                RegistrationNumber = (long)registrationNumber;
+            }
+            else
+            {
+                RegistrationNumber = -1;
+            }
         }
 
         //defining navigational properties for Registration
@@ -980,9 +1018,62 @@ namespace BITCollege_EU.Models
     /// </summary>
     public static class StoredProcedure
     {
-       public static long? NextNumber(String discriminator)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="discriminator"></param>
+        /// <returns></returns>
+        public static long? NextNumber(string discriminator)
         {
-            return 1;
+            try
+            {
+                //Creates a new SqlConnection called connection, setting the Data Source as localhost and
+                //the Initial Catalog as BITCollege_EUContext.
+                SqlConnection connection = new SqlConnection("Data Source=localhost; " +
+                "Initial Catalog=BITCollege_EUContext;Integrated Security=True");
+
+                //Initially sets returnValue to 0.
+                long? returnValue = 0;
+
+                //Creates a new SqlCommand called storedProcedure and sets it to next_number to call that procedure
+                //and gives it the sql connection for the database it will be using.
+                SqlCommand storedProcedure = new SqlCommand("next_number", connection);
+
+                //Tells it that the command type for storedProcedure is a Stored Procedure.
+                storedProcedure.CommandType = CommandType.StoredProcedure;
+
+                //Sets the value of @Discriminator as the string discriminator given.
+                storedProcedure.Parameters.AddWithValue("@Discriminator", discriminator);
+
+                //Creates a new SqlParameter called outputParameter and sets the value of @NewVal to SqlDbType.BigInt.
+                SqlParameter outputParameter = new SqlParameter("@NewVal", SqlDbType.BigInt)
+                {
+                    //Sets the ParameterDirection of outputParameter as Output only.
+                    Direction = ParameterDirection.Output
+                };
+
+                //Adds outputParameter as a parameter to storedProcedure.
+                storedProcedure.Parameters.Add(outputParameter);
+
+                //Opens a database connection using the property settings given by connection.
+                connection.Open();
+
+                //Executes storeProcedure and returns the number of rows affected.
+                storedProcedure.ExecuteNonQuery();
+
+                //Closes the database connection.
+                connection.Close();
+
+                //Sets returnValue to the value of outputParameter and cast it to a long.
+                returnValue = (long?)outputParameter.Value;
+
+                //Returns the final value.
+                return returnValue;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

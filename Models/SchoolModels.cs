@@ -140,7 +140,7 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// StudentCard Model -
+    /// StudentCard Model - to represent the StudentCard model in the database.
     /// </summary>
     public class StudentCard
     {
@@ -159,7 +159,7 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// AcademicProgram Model - to represent the AcademicPrograms table in the database
+    /// AcademicProgram Model - to represent the AcademicPrograms table in the database.
     /// </summary>
     public class AcademicProgram
     {
@@ -671,6 +671,8 @@ namespace BITCollege_EU.Models
         /// </summary>
         public override void SetNextCourseNumber()
         {
+            //Checks the value of StoredProcedure.NextNumber and casts it to a long with the correct
+            //formatting if it isn't, or outputs an error if it is null.
             long? courseNumber = StoredProcedure.NextNumber("NextGradedCourse");
             if (courseNumber != null)
             {
@@ -697,6 +699,8 @@ namespace BITCollege_EU.Models
         /// </summary>
         public override void SetNextCourseNumber()
         {
+            //Checks the value of StoredProcedure.NextNumber and casts it to a long with the correct
+            //formatting if it isn't, or outputs an error if it is null.
             long? courseNumber = StoredProcedure.NextNumber("NextMasteryCourse");
             if (courseNumber != null)
             {
@@ -719,6 +723,8 @@ namespace BITCollege_EU.Models
         /// </summary>
         public override void SetNextCourseNumber()
         {
+            //Checks the value of StoredProcedure.NextNumber and casts it to a String with the correct
+            //formatting if it isn't, or outputs an error if it is null.
             long? courseNumber = StoredProcedure.NextNumber("NextAuditCourse");
             if (courseNumber != null)
             {
@@ -763,10 +769,12 @@ namespace BITCollege_EU.Models
         public String Notes { get; set; }
 
         /// <summary>
-        /// Method that sets appropriate letter followed by the value returned from NextNumber.
+        /// Method that sets the value returned from NextNumber.
         /// </summary>
         public void SetNextRegistrationNumber()
         {
+            //Checks the value of StoredProcedure.NextNumber and casts it to a long with the correct
+            //formatting if it isn't, or outputs an error if it is null.
             long? registrationNumber = StoredProcedure.NextNumber("NextRegistration");
             if (registrationNumber != null)
             {
@@ -784,7 +792,7 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// 
+    /// NextUniqueNumber Model - to represent the NextUniqueNumber table in the database.
     /// </summary>
     public abstract class NextUniqueNumber
     {
@@ -802,15 +810,13 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// 
+    /// NextGradedCourse Model - to represent the NextGradedCourse table in the database.
     /// </summary>
     public class NextGradedCourse : NextUniqueNumber
     {
-        /// <summary>
-        /// 
-        /// </summary>
         private static NextGradedCourse nextGradedCourse = null;
 
+        //Sets NextAvailableNumber for NextGradedCourse.
         private NextGradedCourse()
         {
             NextAvailableNumber = 200000;
@@ -842,18 +848,13 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// 
+    /// NextAuditCourse Model - to represent the NextAuditCourse table in the database.
     /// </summary>
     public class NextAuditCourse : NextUniqueNumber
     {
-        /// <summary>
-        /// 
-        /// </summary>
         private static NextAuditCourse nextAuditCourse = null;
 
-        /// <summary>
-        /// 
-        /// </summary>
+        // Sets NextAvailableNumber for NextAuditCourse
         private NextAuditCourse()
         {
             NextAvailableNumber = 2000;
@@ -885,18 +886,13 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// 
+    /// NextMasteryCourse Model - represents the NextMasteryCourse table in the database
     /// </summary>
     public class NextMasteryCourse : NextUniqueNumber
     {
-        /// <summary>
-        /// 
-        /// </summary>
         private static NextMasteryCourse nextMasteryCourse = null;
 
-        /// <summary>
-        /// 
-        /// </summary>
+        //Sets NextAvailableNumber for NextMasteryCourse
         private NextMasteryCourse()
         {
             NextAvailableNumber = 20000;
@@ -928,18 +924,13 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// 
+    /// NextStudent Model - represents the NextStudent table in the database.
     /// </summary>
     public class NextStudent : NextUniqueNumber
     {
-        /// <summary>
-        /// 
-        /// </summary>
         private static NextStudent nextStudent = null;
 
-        /// <summary>
-        /// 
-        /// </summary>
+        //Sets NextAvailableNumber for NextStudent.
         private NextStudent()
         {
             NextAvailableNumber = 20000000;
@@ -971,18 +962,13 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// 
+    /// NextRegistration Model - represents the NextRegistration table in the database.
     /// </summary>
     public class NextRegistration : NextUniqueNumber
     {
-        /// <summary>
-        /// 
-        /// </summary>
         private static NextRegistration nextRegistration = null;
 
-        /// <summary>
-        /// 
-        /// </summary>
+        //Sets NextAvailableNumber for NextRegistration.
         private NextRegistration()
         {
             NextAvailableNumber = 700;
@@ -1014,15 +1000,16 @@ namespace BITCollege_EU.Models
     }
 
     /// <summary>
-    /// 
+    /// StoredProcedure Model - represents the StoredProcedure table in the database.
     /// </summary>
     public static class StoredProcedure
     {
         /// <summary>
-        /// 
+        /// Static method that creates a SQL command to run the next_number stored procedure and get the next unique
+        /// number in the selected model.
         /// </summary>
-        /// <param name="discriminator"></param>
-        /// <returns></returns>
+        /// <param name="discriminator">The discriminator of the model the method is being used on.</param>
+        /// <returns>The next unique number for the selected model.</returns>
         public static long? NextNumber(string discriminator)
         {
             try

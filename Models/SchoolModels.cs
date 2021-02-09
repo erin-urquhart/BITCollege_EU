@@ -697,7 +697,7 @@ namespace BITCollege_EU.Models
         /// </summary>
         public override void SetNextCourseNumber()
         {
-            long? courseNumber = StoredProcedure.NextNumber("NextMasterCourse");
+            long? courseNumber = StoredProcedure.NextNumber("NextMasteryCourse");
             if (courseNumber != null)
             {
                 CourseNumber = "M-" + courseNumber.ToString();

@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITCollege_EU", "BITCollege_EU.csproj", "{7FC9C33C-3E93-4B76-ADAF-70CA3424A5BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BITCollegeService", "..\BITCollegeService\BITCollegeService.csproj", "{08B293E5-B41A-4F97-B457-C4D9E07BBD44}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{7FC9C33C-3E93-4B76-ADAF-70CA3424A5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FC9C33C-3E93-4B76-ADAF-70CA3424A5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC9C33C-3E93-4B76-ADAF-70CA3424A5BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08B293E5-B41A-4F97-B457-C4D9E07BBD44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08B293E5-B41A-4F97-B457-C4D9E07BBD44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08B293E5-B41A-4F97-B457-C4D9E07BBD44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08B293E5-B41A-4F97-B457-C4D9E07BBD44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

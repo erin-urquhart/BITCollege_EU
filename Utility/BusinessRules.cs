@@ -140,6 +140,7 @@ namespace Utility
 
         }
 
+
         /// <summary>
         /// RegisterError:  To be implemented by student
         /// </summary>
@@ -147,7 +148,32 @@ namespace Utility
         /// <returns></returns>
         public static string RegisterError(int errorCode)
         {
-            return string.Empty;
+            string errorMessage = "Unknown error.";
+
+            switch (errorCode)
+            {
+                case -100
+                    {
+                        errorMessage = "Student cannot register for a course in which there is already an ungraded registration.";
+                        break;
+                    }
+                case -200
+                    {
+                        errorMessage = "Student has exceeded maximum attempts on mastery course.";
+                        break;
+                    }
+                case -300
+                    {
+                        errorMessage = "An error has occurred while updating the registration.";
+                        break;
+                    }
+                default:
+                    {
+                        errorMessage = "Unknown error."
+                    }
+            }
+
+            return errorMessage;
         }
 
     }

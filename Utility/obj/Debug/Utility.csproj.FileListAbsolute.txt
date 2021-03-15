@@ -49,3 +49,9 @@ C:\Users\LCutrone\Desktop\P3Online\03. Assignments\02. College\Updated Assignmen
 C:\Users\LCutrone\Desktop\P3Online\03. Assignments\02. College\Updated Assignments\Assignment 1\Assignment 01 Files\Utility\obj\Debug\Utility.csproj.CoreCompileInputs.cache
 C:\Users\LCutrone\Desktop\P3Online\03. Assignments\02. College\Updated Assignments\Assignment 1\Assignment 01 Files\Utility\obj\Debug\Utility.dll
 C:\Users\LCutrone\Desktop\P3Online\03. Assignments\02. College\Updated Assignments\Assignment 1\Assignment 01 Files\Utility\obj\Debug\Utility.pdb
+C:\Users\Erin\source\repos\BITCollege_EU\Utility\obj\Debug\Utility.csprojAssemblyReference.cache
+C:\Users\Erin\source\repos\BITCollege_EU\Utility\obj\Debug\Utility.csproj.CoreCompileInputs.cache
+C:\Users\Erin\source\repos\BITCollege_EU\Utility\obj\Debug\Utility.dll
+C:\Users\Erin\source\repos\BITCollege_EU\Utility\obj\Debug\Utility.pdb
+C:\Users\Erin\source\repos\BITCollege_EU\Utility\bin\Debug\Utility.dll
+C:\Users\Erin\source\repos\BITCollege_EU\Utility\bin\Debug\Utility.pdb
